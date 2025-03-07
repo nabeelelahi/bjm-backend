@@ -44,6 +44,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
     'email_verified',
     'phone_verified',
     'completion_rate',
+    'status',
     'slug',
     'created_at',
   ];

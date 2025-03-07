@@ -8,5 +8,6 @@ import { name, schema } from './entities/doc-guide.entity';
   imports: [MongooseModule.forFeature([{ name, schema }])],
   controllers: [DocGuideController],
   providers: [DocGuideService],
+  exports: [DocGuideService],
 })
 export class DocGuideModule {}

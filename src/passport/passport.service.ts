@@ -14,5 +14,11 @@ export class PassportService extends BaseService<
 
   public override _softDelete = () => true;
 
-  public override _fillables = () => ['title', 'status', 'slug', 'created_at'];
+  public override _fillables = () => [
+    'title',
+    'status',
+    'slug',
+    'status',
+    'created_at',
+  ];
 }

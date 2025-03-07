@@ -19,6 +19,13 @@ import { CommunityModule } from './community/community.module';
 import { ArticleModule } from './article/article.module';
 import { PassportModule } from './passport/passport.module';
 import { QuestionAnswerModule } from './question-answer/question-answer.module';
+import { ArticleController } from './article/article.controller';
+import { CommunityController } from './community/community.controller';
+import { DocGuideController } from './doc-guide/doc-guide.controller';
+import { QuestionAnswerController } from './question-answer/question-answer.controller';
+import { DashboardController } from './dashboard/dashboard.controller';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ServiceModule } from './service/service.module';
 
 @Module({
   imports: [
@@ -35,8 +42,10 @@ import { QuestionAnswerModule } from './question-answer/question-answer.module';
     ArticleModule,
     PassportModule,
     QuestionAnswerModule,
+    DashboardModule,
+    ServiceModule,
   ],
-  controllers: [AppController, FileController],
+  controllers: [AppController, FileController, DashboardController],
   providers: [
     AppService,
     FileService,
@@ -64,6 +73,13 @@ export class AppModule {
         { path: 'api/sub-category/:id', method: RequestMethod.GET },
         { path: 'api/file/upload', method: RequestMethod.POST },
       )
-      .forRoutes(UserController, FileController);
+      .forRoutes(
+        UserController,
+        FileController,
+        ArticleController,
+        CommunityController,
+        DocGuideController,
+        QuestionAnswerController,
+      );
   }
 }

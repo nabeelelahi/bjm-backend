@@ -8,5 +8,6 @@ import { name, schema } from './entities/community.entity';
   imports: [MongooseModule.forFeature([{ name, schema }])],
   controllers: [CommunityController],
   providers: [CommunityService],
+  exports: [CommunityService],
 })
 export class CommunityModule {}

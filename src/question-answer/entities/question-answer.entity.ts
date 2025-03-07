@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import baseModel from '../../base/base.model';
+import { Role } from 'src/base/base.dto';
 
 export const name = 'question-asnwer';
 
@@ -10,12 +11,51 @@ export const schema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   parent: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'question-asnwer',
     default: null,
+  },
+  community: {
+    type: Schema.Types.ObjectId,
+    ref: 'community',
+    default: null,
+  },
+  user: {
+    _id: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: [
+        Role.ADMIN,
+        Role.RESTAURANT,
+        Role.STORE,
+        Role.SUPERADMIN,
+        Role.USER,
+      ],
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    mobile_no: {
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+    },
   },
   ...baseModel,
 });
