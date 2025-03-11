@@ -26,6 +26,7 @@ import { QuestionAnswerController } from './question-answer/question-answer.cont
 import { DashboardController } from './dashboard/dashboard.controller';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ServiceModule } from './service/service.module';
+import { PassportController } from './passport/passport.controller';
 
 @Module({
   imports: [
@@ -80,6 +81,7 @@ export class AppModule {
         CommunityController,
         DocGuideController,
         QuestionAnswerController,
+        PassportController
       );
   }
 }
