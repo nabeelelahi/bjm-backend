@@ -2,7 +2,7 @@
 services:
   backend:
     build:
-      context: ./bjm-backend
+      context: .
       dockerfile: Dockerfile
     container_name: app
     expose:
@@ -13,7 +13,7 @@ services:
 
   nginx:
     build:
-      context: ./bjm-backend
+      context: .
       dockerfile: nginx.Dockerfile
     container_name: nginx
     ports:
