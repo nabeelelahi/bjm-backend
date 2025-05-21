@@ -1,16 +1,15 @@
-
-
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: app
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
+    command: yarn start:dev
+    # 🔴 REMOVE this to avoid overwriting container content
     volumes:
       - .:/app
-    command: yarn start:dev
 
   nginx:
     build:
