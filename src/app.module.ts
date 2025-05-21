@@ -27,6 +27,8 @@ import { DashboardController } from './dashboard/dashboard.controller';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ServiceModule } from './service/service.module';
 import { PassportController } from './passport/passport.controller';
+import { PassportMarkerModule } from './passport-marker/passport-marker.module';
+import { PassportMarkerController } from './passport-marker/passport-marker.controller';
 
 @Module({
   imports: [
@@ -45,6 +47,7 @@ import { PassportController } from './passport/passport.controller';
     QuestionAnswerModule,
     DashboardModule,
     ServiceModule,
+    PassportMarkerModule,
   ],
   controllers: [AppController, FileController, DashboardController],
   providers: [
@@ -81,7 +84,8 @@ export class AppModule {
         CommunityController,
         DocGuideController,
         QuestionAnswerController,
-        PassportController
+        PassportController,
+        PassportMarkerController,
       );
   }
 }

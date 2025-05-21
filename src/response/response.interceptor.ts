@@ -43,6 +43,7 @@ export class ResponseInterceptor implements NestInterceptor {
       catchError((error) => {
         let statusCode: number;
         let message: string | { message: string };
+        console.log('error...', error);
         if (error instanceof HttpException) {
           // Handle HTTP exceptions
           statusCode = error.getStatus();

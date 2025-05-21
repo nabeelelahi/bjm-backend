@@ -29,6 +29,11 @@ export class PassportController {
     return this._service.findAll(_query);
   }
 
+  @Get('achievement')
+  achievement() {
+    return this._service.achievement();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this._service.findOne(id);
