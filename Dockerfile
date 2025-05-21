@@ -1,5 +1,3 @@
-# Dockerfile
-
 FROM node:22-alpine
 
 WORKDIR /app
@@ -7,8 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 
-RUN yarn install
 
 COPY . .
+RUN yarn global add @nestjs/cli
+RUN yarn install
 
 CMD ["yarn", "start:dev"]
