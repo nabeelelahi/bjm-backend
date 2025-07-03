@@ -3,12 +3,17 @@ import { BaseService } from 'src/base/base.service';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateCommunityDto } from './dto/create-community.dto';
+import { UserContext } from 'src/user/user.context';
+import { baseConditionType, baseFindQueryType } from 'src/base/base.dto';
 
 export class CommunityService extends BaseService<
   typeof schema,
   CreateCommunityDto
 > {
-  constructor(@InjectModel(name) override _model: Model<typeof schema>) {
+  constructor(
+    @InjectModel(name) override _model: Model<typeof schema>,
+    private readonly userContext: UserContext,
+  ) {
     super();
   }
 
@@ -21,4 +26,15 @@ export class CommunityService extends BaseService<
     'slug',
     'created_at',
   ];
+
+  protected override _beforeGetHook = async (
+    _query: baseFindQueryType<typeof schema, CreateCommunityDto>,
+    condition: baseConditionType,
+  ) => {
+    const user = this.userContext.get()
+    if (user && user.role !== 'super-admin')
+      // @ts-ignore
+      _query.where({status: true})
+  };
+
 }

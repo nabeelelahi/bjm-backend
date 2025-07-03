@@ -44,14 +44,16 @@ export class PassportService extends BaseService<
     const condition = omit(_query, ['page', 'limit']);
     limit = typeof limit === 'string' ? parseInt(limit) : limit || 10;
     page = (typeof page === 'string' ? parseInt(page) : page) - 1 || 0;
+    let where: { deleted_at: null, status?: boolean } = { deleted_at: null }
+    const user = this.userContext.get();
+    if (user.role !== 'super-admin') where.status = true;
     let records = (await query
-      .where({ deleted_at: null })
+      .where(where)
       .select(this._fillables?.() || [])
       .skip(page * limit)
       .limit(limit)
       .exec()) as unknown as CreatePassportDto[];
     const count = await this._model.countDocuments(condition);
-    const user = this.userContext.get();
     if (user.role === 'super-admin')
       return {
         records,
@@ -84,14 +86,16 @@ export class PassportService extends BaseService<
 
   public async achievement() {
     const user = this.userContext.get();
-    const total = await this._model.countDocuments();
-    const completed = await this._passport_marker_service._model.countDocuments(
+    const total = (await this._model.where({ status: true }).find()).map(i => i._id.toString());
+    let completed = (await this._passport_marker_service._model.find(
       { user: user._id },
-    );
-    const percentage = (completed / total) * 100;
+      // @ts-ignore
+    )).map(i => i.passport.toString());
+    completed = completed.filter(c => total.includes(c))
+   const percentage = (completed.length / total.length) * 100;
     return {
-      completed,
-      total,
+      completed: completed.length,
+      total: total.length,
       percentage: Number(percentage.toFixed(2)),
     };
   }

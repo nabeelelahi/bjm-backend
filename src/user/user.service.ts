@@ -103,7 +103,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
 
   async verifyCredentails(_body: LoginDto): Promise<any> {
     const users = await this._model.find({
-      [verificationConstant.mode]: _body[verificationConstant.mode],
+      [verificationConstant.mode]: _body[verificationConstant.mode].toLocaleLowerCase(),
       deleted_at: null,
     });
     if (!users.length) return false;
@@ -189,7 +189,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
       [_body.mode]: _body.identifier.toLocaleLowerCase(),
     });
     if (record) {
-      this.resetVerificationCode(_body).then(() => {});
+      this.resetVerificationCode(_body).then(() => { });
       return {};
     } else {
       const mode = _body.mode == 'email' ? 'Email Address' : 'Phone Number';
@@ -254,7 +254,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
    */
   /******  f3f589fb-e4fa-48d3-8d77-68e5f4e29f28  *******/
   async changePassword(_body: ChangePaswordDto): Promise<object> {
-    const user = this.userContext.get();
+    const user = await this._model.findOne({ _id: this.userContext.get() });
     let verifyPassword = bcrypt.compareSync(
       _body['oldPassword'],
       user['password'],

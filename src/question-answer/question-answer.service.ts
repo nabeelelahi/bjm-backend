@@ -38,6 +38,9 @@ export class QuestionAnswerService extends BaseService<
     if (!condition['parent']) condition['parent'] = null;
     _query.where(condition);
     _query.sort({ created_at: -1 });
+    const user = this.userContext.get()
+    if (user && user.role !== 'super-admin')
+      _query.where({status: true})
   };
 
   protected override _beforeCreateHook = async (
