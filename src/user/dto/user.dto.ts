@@ -35,7 +35,7 @@ export class UserDto extends BaseCreateDto {
   email: string;
 
   @ApiPropertyOptional()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   mobile_no: string;
 

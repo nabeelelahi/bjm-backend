@@ -25,6 +25,7 @@ export const schema = new Schema({
   },
   address: {
     type: String,
+    default: ''
   },
   email: {
     type: String,
@@ -33,7 +34,7 @@ export const schema = new Schema({
   },
   mobile_no: {
     type: String,
-    required: true,
+    default: ''
   },
   username: {
     type: String,
