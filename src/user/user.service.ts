@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -235,7 +236,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
       },
       ['reset_password_token'],
     );
-    if (!user) throw new UnauthorizedException('Invalid Reset Password Token');
+    if (!user) throw new BadRequestException('Invalid Reset Password Token');
     await this._model.findOneAndUpdate(
       { reset_password_token: _body.reset_password_token },
       { password, reset_password_token: null },
