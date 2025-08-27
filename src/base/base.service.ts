@@ -183,7 +183,6 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
       } else {
         await this._model.deleteMany(
           { _id: { $in: _body['_ids'] } },
-          { $set: { deleted_at: new Date() } },
         );
       }
       if (isFunction(this._afterDeleteHook)) {
