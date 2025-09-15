@@ -12,7 +12,7 @@ export default {
   },
   created_at: {
     type: Date,
-    default: DateTime.now().toUTC(),
+    default: new Date(),
   },
   updated_at: {
     type: Date,

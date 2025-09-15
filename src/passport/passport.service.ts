@@ -86,7 +86,7 @@ export class PassportService extends BaseService<
 
   public async achievement() {
     const user = this.userContext.get();
-    const total = (await this._model.where({ status: true }).find()).map(i => i._id.toString());
+    const total = (await this._model.where({ status: true, deleted_at: null }).find()).map(i => i._id.toString());
     let completed = (await this._passport_marker_service._model.find(
       { user: user._id },
       // @ts-ignore
