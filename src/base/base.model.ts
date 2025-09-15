@@ -12,7 +12,7 @@ export default {
   },
   created_at: {
     type: Date,
-    default: new Date(),
+    // default: new Date(),
   },
   updated_at: {
     type: Date,

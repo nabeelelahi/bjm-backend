@@ -117,6 +117,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
    */
   async create(body: Partial<dto>): Promise<dto | Partial<dto> | object> {
     let response: baseServiceReturnType<dto>;
+    body.created_at = new Date();
     if (isFunction(this._beforeCreateHook))
       response = await this._beforeCreateHook(body);
     if (response) return response;
