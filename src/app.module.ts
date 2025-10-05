@@ -31,6 +31,8 @@ import { PassportMarkerModule } from './passport-marker/passport-marker.module';
 import { PassportMarkerController } from './passport-marker/passport-marker.controller';
 import { NotificationModule } from './notification/notification.module';
 import { NotificationController } from './notification/notification.controller';
+import { UserFeedbackModule } from './user-feedback/user-feedback.module';
+import { UserFeedbackController } from './user-feedback/user-feedback.controller';
 
 @Module({
   imports: [
@@ -51,6 +53,7 @@ import { NotificationController } from './notification/notification.controller';
     ServiceModule,
     PassportMarkerModule,
     NotificationModule,
+    UserFeedbackModule,
   ],
   controllers: [AppController, FileController, DashboardController],
   providers: [
@@ -89,7 +92,8 @@ export class AppModule {
         QuestionAnswerController,
         PassportController,
         PassportMarkerController,
-        NotificationController
+        NotificationController,
+        UserFeedbackController
       );
   }
 }
