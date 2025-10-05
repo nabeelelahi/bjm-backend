@@ -3,7 +3,6 @@ import { BaseService } from 'src/base/base.service';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserFeedbackDto } from './dto/create-user-feedback.dto';
-import { baseFindQueryType } from 'src/base/base.dto';
 import { UserContext } from 'src/user/user.context';
 
 export class UserFeedbackService extends BaseService<
