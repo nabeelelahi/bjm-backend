@@ -282,7 +282,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
    */
   async updateRecord(condition: object, body: Partial<dto>): Promise<dto> {
     await this._model.findOneAndUpdate(condition, body as object);
-    return await this.findOneRecord({ condition });
+    return await this.findOneRecord(condition);
   }
 
   /**
