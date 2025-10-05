@@ -300,7 +300,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
     if (softDelete === false) await this._model.findOneAndDelete(condition);
     else
       await this._model.findOneAndUpdate(
-        { condition },
+         condition,
         { $set: { deleted_at: new Date() } },
       );
     return true;
