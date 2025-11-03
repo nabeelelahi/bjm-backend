@@ -282,7 +282,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
    */
   async updateRecord(condition: object, body: Partial<dto>): Promise<dto> {
     await this._model.findOneAndUpdate(condition, body as object);
-    return await this.findOneRecord({ condition });
+    return await this.findOneRecord(condition);
   }
 
   /**
@@ -300,7 +300,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
     if (softDelete === false) await this._model.findOneAndDelete(condition);
     else
       await this._model.findOneAndUpdate(
-        { condition },
+         condition,
         { $set: { deleted_at: new Date() } },
       );
     return true;
