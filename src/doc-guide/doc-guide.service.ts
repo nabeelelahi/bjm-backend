@@ -22,6 +22,7 @@ export class DocGuideService extends BaseService<
   public override _fillables = () => [
     'title',
     'sub_title',
+    'serial_number',
     'file_url',
     'status',
     'slug',
@@ -34,8 +35,9 @@ export class DocGuideService extends BaseService<
   ) => {
     const user = this.userContext.get()
     if (user && user.role !== 'super-admin')
-      // @ts-ignore
-      _query.where({status: true})
+      _query.where({ status: true })
+    // @ts-ignore
+    _query.sort({ serial_number: 1 })
   };
 
 }

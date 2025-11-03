@@ -3,9 +3,12 @@ import { IsNotEmpty } from 'class-validator';
 import { BaseCreateDto } from 'src/base/base.dto';
 
 export class CreateDocGuideDto extends BaseCreateDto {
-@ApiProperty()
+  @ApiProperty()
   @IsNotEmpty()
   title: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  serial_number: string;
   @ApiProperty()
   @IsNotEmpty()
   sub_title: string;

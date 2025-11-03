@@ -4,6 +4,10 @@ import baseModel from '../../base/base.model';
 export const name = 'doc-guide';
 
 export const schema = new Schema({
+  serial_number: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
