@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserFeedbackDto } from './dto/create-user-feedback.dto';
 import { UserContext } from 'src/user/user.context';
+import { FileService } from 'src/file/file.service';
 
 export class UserFeedbackService extends BaseService<
   typeof schema,
@@ -12,6 +13,7 @@ export class UserFeedbackService extends BaseService<
   constructor(
     @InjectModel(name) override _model: Model<typeof schema>,
     private readonly userContext: UserContext,
+    private readonly fileService: FileService
   ) {
     super();
   }
@@ -22,6 +24,7 @@ export class UserFeedbackService extends BaseService<
     'title',
     'description',
     'user',
+    'image_url',
     'parent',
     'community',
     'status',
@@ -43,6 +46,9 @@ export class UserFeedbackService extends BaseService<
       mobile_no,
       username,
     };
+    if (payload.image) {
+      payload.image_url = await this.fileService.upload(payload.image);
+    }
     console.log('craete product payload', payload);
   };
 }

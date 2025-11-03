@@ -13,6 +13,10 @@ export const schema = new Schema({
     type: String,
     required: true,
   },
+  image_url: {
+    type: String,
+    required: true,
+  },
     user: {
       _id: {
         type: Schema.Types.ObjectId,

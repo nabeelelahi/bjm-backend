@@ -21,4 +21,12 @@ export class CreateUserFeedbackDto extends BaseCreateDto {
         username: string;
     };
     feedback_status?: string
+
+    @ApiProperty({
+        type: 'string',
+        format: 'binary',
+        required: false,
+    })
+    image: Express.Multer.File;
+    image_url: string
 }
